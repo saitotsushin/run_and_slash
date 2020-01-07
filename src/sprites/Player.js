@@ -50,11 +50,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     /*==============================
     デバッグ
     ==============================*/
-    this.debugText = this.scene.add.text(10, 10, '', { font: '10px Courier', fill: '#FFFFFF' });
+    this.debugText = this.scene.add.text(10, 40, '', { font: '10px Courier', fill: '#FFFFFF' });
     this.debugText.depth = 100;
     this.debugText.setScrollFactor(0,0);
 
-    console.log("this.scene.map.widthInPixels",this.scene.map.widthInPixels)
   }
 
   update(keys, time, delta) {
@@ -63,8 +62,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       [
         'keys.isTOUCH  :'+keys.isTOUCH,
         'keys.isRELEASE:'+keys.isRELEASE,
-        'body.x        :'+ (this.x + this.width*1.6),
-        'widthInPixels :'+this.scene.map.widthInPixels,
+        'body.x        :'+ (this.x + this.width*1.6)
       ]
     );
 
@@ -92,9 +90,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     if(keys.isTOUCH === true && keys.RIGHT){
-      // if(!this.isShot){
-        this.fromShotPool();
-      // }
+      this.fromShotPool();
     }
     if(this.shotTimer > 0){
       this.shotTimer -= delta;
@@ -189,7 +185,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       bullet.shot(
         this.status.power,
         this.x + this.width/2,
-        this.y
+        this.y,
+        this.MOVE_SPEED
       );      
     }
 
